@@ -1,0 +1,14 @@
+{
+  "name": "detritus-pagination",
+  "version": "1.0.1",
+  "description": "An easy to use pagination handler",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "y21",
+  "license": "ISC",
+  "dependencies": {
+    "eventemitter3": "^4.0.0"
+  }
+}
