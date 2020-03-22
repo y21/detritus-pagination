@@ -18,7 +18,10 @@ const paginator = new Paginator(client, {
     maxTime: 300000,
     // Whether it should jump back to page 1 if the user tried to go past the last page
     // Defaults to false
-	pageLoop: true
+	pageLoop: true,
+	// Whether a page number should be shown in embed footers
+	// If a string is passed as page, it will append the page number to the string
+	pageNumber: true
 });
 
 // Reactions that will be passed in paginator.createReactionPaginator lateron
