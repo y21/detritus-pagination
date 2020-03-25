@@ -25,6 +25,7 @@ const paginator = new Paginator(client, {
 });
 
 // Reactions that will be passed in paginator.createReactionPaginator lateron
+// This is optional and default emojis will be used if no `reactions` object is passed
 const reactions = {
 	previousPage: "⬅️",
 	nextPage: "➡️"
@@ -73,6 +74,10 @@ client.on("messageCreate", async ctx => {
 		paging.on("previous", () => {
 			message.reply("`previous` event triggered");
 		})
+
+		paging.on("page", data => {
+			message.reply(`skipped to page ${data.page}`);
+		});
 	}
 });
 
