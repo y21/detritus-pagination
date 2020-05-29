@@ -21,6 +21,11 @@ declare module "detritus-pagination" {
 
     interface ReactionPaginatorData extends BasePaginatorData {}
 
+    interface PageEventData {
+        page: number,
+        paginator: BasePaginator
+    }
+
     interface BasePaginatorData {
         message: Message;
         commandMessage?: Message;
@@ -52,6 +57,10 @@ declare module "detritus-pagination" {
         public next(): Promise<Message>;
         public jumpTo(page: number): Promise<Message>;
         public stop(): BasePaginator;
+        public on(event: "next", fn: (paginator: BasePaginator) => any): BasePaginator;
+        public on(event: "previous", fn: (paginator: BasePaginator) => any): BasePaginator;
+        public on(event: "page", fn: (data: PageEventData) => any): BasePaginator;
+        public on(event: "raw", fn: (data: any) => any): BasePaginator;
     }
 
     class ReactionPaginator extends BasePaginator {
