@@ -48,6 +48,7 @@ declare module "detritus-pagination" {
         public readonly client: Paginator;
         public readonly message: Message;
         public readonly commandMessage: Message | null;
+        public readonly targetUser: string;
         public pages: any[];
         public index: number;
 
