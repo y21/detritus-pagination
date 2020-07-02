@@ -27,10 +27,11 @@ declare module "detritus-pagination" {
     }
 
     interface BasePaginatorData {
-        message: Message;
-        commandMessage?: Message;
-        pages: any[];
+        message?: Message;
+        commandMessage?: Message | Map<string, Message>;
+        pages?: any[];
         reactions?: PaginatorReactions;
+        maxTime?: number;
     }
 
     class Paginator {
@@ -47,8 +48,9 @@ declare module "detritus-pagination" {
     class BasePaginator extends EventEmitter {
         public readonly client: Paginator;
         public readonly message: Message;
-        public readonly commandMessage: Message | null;
+        public readonly commandMessage: Message | Map<string, Message> | null;
         public readonly targetUser: string;
+        public readonly isShared: boolean;
         public pages: any[];
         public index: number;
 
@@ -62,6 +64,12 @@ declare module "detritus-pagination" {
         public on(event: "previous", fn: (paginator: BasePaginator) => any): BasePaginator;
         public on(event: "page", fn: (data: PageEventData) => any): BasePaginator;
         public on(event: "raw", fn: (data: any) => any): BasePaginator;
+        public on(event: "stop", fn: (data: BasePaginator) => any): BasePaginator;
+        public isCommandMessage(messageId: string): boolean;
+        public isInChannel(channelId: string): boolean;
+        public isTarget(user: string): boolean;
+        public update(data: any): Promise<void>;
+
     }
 
     class ReactionPaginator extends BasePaginator {
