@@ -49,7 +49,7 @@ declare module "detritus-pagination" {
         public readonly client: Paginator;
         public readonly message: Message;
         public readonly commandMessage: Message | Map<string, Message> | null;
-        public readonly targetUser: string;
+        public readonly targetUser: string | Set<string>;
         public readonly isShared: boolean;
         public pages: any[];
         public index: number;
