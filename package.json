@@ -9,6 +9,6 @@
   "author": "y21",
   "license": "ISC",
   "dependencies": {
-    "eventemitter3": "^4.0.0"
+    "eventemitter3": "^4.0.4"
   }
 }
