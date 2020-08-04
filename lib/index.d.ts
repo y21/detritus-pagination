@@ -60,11 +60,11 @@ declare module "detritus-pagination" {
         public next(): Promise<Message>;
         public jumpTo(page: number): Promise<Message>;
         public stop(): BasePaginator;
-        public on(event: "next", fn: (paginator: BasePaginator) => any): BasePaginator;
-        public on(event: "previous", fn: (paginator: BasePaginator) => any): BasePaginator;
-        public on(event: "page", fn: (data: PageEventData) => any): BasePaginator;
-        public on(event: "raw", fn: (data: any) => any): BasePaginator;
-        public on(event: "stop", fn: (data: BasePaginator) => any): BasePaginator;
+        public on(event: "next", fn: (paginator: BasePaginator) => any): this;
+        public on(event: "previous", fn: (paginator: BasePaginator) => any): this;
+        public on(event: "page", fn: (data: PageEventData) => any): this;
+        public on(event: "raw", fn: (data: any) => any): this;
+        public on(event: "stop", fn: (data: BasePaginator) => any): this;
         public isCommandMessage(messageId: string): boolean;
         public isInChannel(channelId: string): boolean;
         public isTarget(user: string): boolean;
