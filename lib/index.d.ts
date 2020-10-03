@@ -1,6 +1,7 @@
 import { ShardClient, ClusterClient } from "detritus-client";
 import { EventEmitter } from "eventemitter3";
 import { Message } from "detritus-client/lib/structures";
+import { Context } from "detritus-client/lib/command";
 
 declare module "detritus-pagination" {
     interface PaginatorReactions {
@@ -27,7 +28,7 @@ declare module "detritus-pagination" {
     }
 
     interface BasePaginatorData {
-        message?: Message;
+        message?: Message | Context;
         commandMessage?: Message | Map<string, Message>;
         pages?: any[];
         reactions?: PaginatorReactions;
@@ -42,7 +43,7 @@ declare module "detritus-pagination" {
         public reactions: PaginatorReactions | undefined;
         public activeListeners: Array<BasePaginator> | Array<ReactionPaginator>;
         constructor(shardClient: ShardClient | ClusterClient, options: PaginatorOptions);
-        public createReactionPaginator(options: ReactionPaginatorData): ReactionPaginator;
+        public createReactionPaginator(options: ReactionPaginatorData): Promise<ReactionPaginator>;
     }
 
     class BasePaginator extends EventEmitter {
@@ -69,7 +70,7 @@ declare module "detritus-pagination" {
         public isInChannel(channelId: string): boolean;
         public isTarget(user: string): boolean;
         public update(data: any): Promise<void>;
-
+        private editOrReply(data: any[]): Promise<Message>;
     }
 
     class ReactionPaginator extends BasePaginator {
