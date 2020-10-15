@@ -1,6 +1,6 @@
 {
   "name": "detritus-pagination",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "An easy to use pagination handler",
   "main": "./lib/index.js",
   "scripts": {
