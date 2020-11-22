@@ -1,7 +1,12 @@
 # detritus-pagination
 An easy-to-use paginator for the Discord API Wrapper [Detritus](https://npmjs.org/detritus-client).
 
-# Examples
+## Using CommandClient
+By default, `CommandClient#client` returns a ClusterClient, which is a class that manages `ShardClient`s. <br />
+To make it work with `detritus-pagination`, either set `useClusterClient` to false in the CommandClient constructor, or use `PaginatorCluster` instead. <br />
+It maintains a `WeakMap<ShardClient, Paginator>` internally.
+
+## Examples
 ```js
 // Imports
 const { ShardClient } = require("detritus-client");
@@ -31,26 +36,18 @@ const reactions = {
     nextPage: "➡️"
 };
 
+const createEmbedMessage = (title, description) => ({
+    embed: { title, description }
+});
+
 // Message event for commands 
 client.on("messageCreate", async ctx => {
     const { message } = ctx;
     if (message.content === "!!test") {
         // Pages for this command
-        const pages = [{
-                embed: {
-                    title: "first page",
-                    color: 0x0000ff,
-                    description: "hello"
-                }
-            },
-            {
-                embed: {
-                    title: "second page",
-                    color: 0x00ff00,
-                    description: "hello again"
-                }
-            },
-
+        const pages = [
+            createEmbedMessage("Hello", ":)"),
+            createEmbedMessage("Bye", ":(")
         ];
 
         // Create a ReactionPaginator
