@@ -46,6 +46,13 @@ declare module "detritus-pagination" {
         public createReactionPaginator(options: ReactionPaginatorData): Promise<ReactionPaginator>;
     }
 
+    class PaginatorCluster {
+        public paginators: WeakMap<ShardClient, Paginator>;
+        public data: PaginatorOptions;
+        constructor(clusterClient: ClusterClient, data: PaginatorOptions);
+        public createReactionPaginator(options: ReactionPaginatorData): Promise<ReactionPaginator>;
+    }
+
     class BasePaginator extends EventEmitter {
         public readonly client: Paginator;
         public readonly message: Message;
@@ -65,7 +72,7 @@ declare module "detritus-pagination" {
         public on(event: "previous", fn: (paginator: BasePaginator) => any): this;
         public on(event: "page", fn: (data: PageEventData) => any): this;
         public on(event: "raw", fn: (data: any) => any): this;
-        public on(event: "stop", fn: (data: BasePaginator, timeout?: boolean) => any): this;
+        public on(event: "stop", fn: (data: BasePaginator, timeout: boolean) => any): this;
         public isCommandMessage(messageId: string): boolean;
         public isInChannel(channelId: string): boolean;
         public isTarget(user: string): boolean;
