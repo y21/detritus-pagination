@@ -46,6 +46,13 @@ declare module "detritus-pagination" {
         public createReactionPaginator(options: ReactionPaginatorData): Promise<ReactionPaginator>;
     }
 
+    class PaginatorCluster {
+        public paginators: WeakMap<ShardClient, Paginator>;
+        public data: PaginatorOptions;
+        constructor(clusterClient: ClusterClient, data: PaginatorOptions);
+        public createReactionPaginator(options: ReactionPaginatorData): Promise<ReactionPaginator>;
+    }
+
     class BasePaginator extends EventEmitter {
         public readonly client: Paginator;
         public readonly message: Message;
